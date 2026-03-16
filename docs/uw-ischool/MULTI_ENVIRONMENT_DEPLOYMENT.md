@@ -306,7 +306,6 @@ Run the smoke test for that hostname after restart.
 
 ## What Not to Do
 
-- Do not ask students to enter DB port numbers in the UI for this deployment model.
 - Do not move an already working environment just to match the example paths in this doc.
 - Do not run multiple environments behind URL path prefixes like `/$SECTION_ID` unless you first refactor the app for a configurable base path.
 - Do not reuse the same `SESSION_SECRET` or `INSTRUCTOR_TOKEN` across environments.
