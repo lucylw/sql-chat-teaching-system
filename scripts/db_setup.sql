@@ -44,6 +44,13 @@ BEGIN
   END LOOP;
 END $$;
 
+-- Drop all databases starting with __project_
+SELECT format('DROP DATABASE IF EXISTS %I;', datname)
+FROM pg_database
+WHERE datname LIKE '__project_%'
+ORDER BY datname;
+\gexec
+
 -- Create one database per group+section (use \gexec)
 WITH combos AS (
   SELECT
