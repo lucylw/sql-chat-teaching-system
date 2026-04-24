@@ -1628,6 +1628,7 @@ function autosizeTextarea(el) {
 // DB-connected gate
 // ----------------------------
 state.isDbConnected = false;
+state.demoMode = false;
 
 function renderGate() {
   if (state.isDbConnected) {
@@ -1638,6 +1639,7 @@ function renderGate() {
 
     // show tabs (chat + sql lab) only when connected to schema / database
     setTabsVisible(true);
+    if (state.demoMode) tabSqlBtn.classList.add("hidden");
     updateChatEmptyState();
     maybeShowSqlTabTip();
   } else {
@@ -2209,6 +2211,7 @@ loginBtn.addEventListener("click", async () => {
     setBrandSubFromSession();
     setMsg(loginMsg, "Connected to your group database.", true);
     state.isDbConnected = true;
+    state.demoMode = !!data?.demoMode;
     renderGate();
     await setTab("chat");
     toast("Connected");
@@ -2242,6 +2245,7 @@ async function tryDBCredentials() {
     setBrandSubFromSession();
     setMsg(loginMsg, "Connected to your group database.", true);
     state.isDbConnected = true;
+    state.demoMode = !!data?.demoMode;
     renderGate();
     await setTab("chat");
     toast("Connected");
@@ -2716,6 +2720,7 @@ connMenuDbLogout.addEventListener("click", async () => {
   state.activeChannelId = null;
   state.channels = [];
   state.isDbConnected = false;
+  state.demoMode = false;
   ensureSqlLabUI();
   resetSqlStatus();
 

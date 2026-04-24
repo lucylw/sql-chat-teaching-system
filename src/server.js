@@ -728,7 +728,7 @@ app.post("/api/login", async (req, res) => {
     req.session.chatUsername = null;
     clearSchemaInfoCache(req);
     if (!req.session.sqlTemplates) req.session.sqlTemplates = {};
-    res.json({ ok: true });
+    res.json({ ok: true, demoMode: isSuperUserReq(req) });
   } catch (e) {
     res.status(401).json({
       error: "Login failed. Check username/password and connectivity.",
@@ -743,7 +743,7 @@ app.post("/api/credentials_login", requireGroupLogin, dbRoute(async (req, res) =
   const password = req.session.dbPass;
 
   await testDbLogin(username, password);
-  res.json({ ok: true, dbUser: username });
+  res.json({ ok: true, dbUser: username, demoMode: isSuperUserReq(req) });
 }, (e) => dbError(
   "Login failed. Check username/password and connectivity.",
   String(e.message || e),
