@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: "info330",
+      name: "sql-chat-c-spr26",
       script: "src/server.js",
       cwd: __dirname + "/../..",
       env_file: __dirname + "/../../.env",
