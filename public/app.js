@@ -2201,7 +2201,7 @@ loginBtn.addEventListener("click", async () => {
   setMsg(loginMsg, "");
   loginBtn.disabled = true;
   try {
-    await api("/api/login", "POST", {
+    const data = await api("/api/login", "POST", {
       username: usernameEl.value.trim(),
       password: passwordEl.value
     });
