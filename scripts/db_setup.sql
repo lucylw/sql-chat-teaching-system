@@ -21,7 +21,7 @@ DECLARE
   r text;
 BEGIN
   FOR sec, ord IN
-    SELECT * FROM (VALUES ('ba',1),('bb',2),('ca',3),('cb',4)) AS t(sec, ord)
+    SELECT * FROM (VALUES ('ca',1),('cb',2)) AS t(sec, ord)
   LOOP
     FOR i IN 1..15 LOOP
       grpnum := (ord - 1) * 15 + i;                 -- 1..60
@@ -50,10 +50,10 @@ WITH combos AS (
     ((ord - 1) * 15 + i) AS grpnum,
     ('grp' || lpad(((ord - 1) * 15 + i)::text, 2, '0')) AS g,
     sec
-  FROM (VALUES ('ba',1),('bb',2),('ca',3),('cb',4)) AS s(sec, ord)
+  FROM (VALUES ('ca',1),('cb',2)) AS s(sec, ord)
   CROSS JOIN generate_series(1,15) AS i
 )
--- SELECT format('DROP DATABASE IF EXISTS %I;', '__project_' || g || '_' || sec || '_app')
+SELECT format('DROP DATABASE IF EXISTS %I;', '__project_' || g || '_' || sec || '_app')
 FROM combos
 ORDER BY grpnum;
 \gexec
@@ -63,7 +63,7 @@ WITH combos AS (
     ((ord - 1) * 15 + i) AS grpnum,
     ('grp' || lpad(((ord - 1) * 15 + i)::text, 2, '0')) AS g,
     sec
-  FROM (VALUES ('ba',1),('bb',2),('ca',3),('cb',4)) AS s(sec, ord)
+  FROM (VALUES ('ca',1),('cb',2)) AS s(sec, ord)
   CROSS JOIN generate_series(1,15) AS i
 )
 SELECT format('CREATE DATABASE %I OWNER project_admin;', '__project_' || g || '_' || sec || '_app')
@@ -79,7 +79,7 @@ WITH combos AS (
     sec,
     (('grp' || lpad(((ord - 1) * 15 + i)::text, 2, '0')) || '_' || sec) AS r,
     ('__project_' || ('grp' || lpad(((ord - 1) * 15 + i)::text, 2, '0')) || '_' || sec || '_app') AS dbname
-  FROM (VALUES ('ba',1),('bb',2),('ca',3),('cb',4)) AS s(sec, ord)
+  FROM (VALUES ('ca',1),('cb',2)) AS s(sec, ord)
   CROSS JOIN generate_series(1,15) AS i
 )
 SELECT format($cmd$
@@ -105,7 +105,7 @@ WITH combos AS (
     sec,
     (('grp' || lpad(((ord - 1) * 15 + i)::text, 2, '0')) || '_' || sec) AS r,
     ('__project_' || ('grp' || lpad(((ord - 1) * 15 + i)::text, 2, '0')) || '_' || sec || '_app') AS dbname
-  FROM (VALUES ('ba',1),('bb',2),('ca',3),('cb',4)) AS s(sec, ord)
+  FROM (VALUES ('ca',1),('cb',2)) AS s(sec, ord)
   CROSS JOIN generate_series(1,15) AS i
 )
 -- needed because I messed up the previous version
