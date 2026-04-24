@@ -7,9 +7,9 @@
     "start": "node src/server.js",
     "test": "npm run check:contract",
     "check:contract": "node scripts/check_contract.js",
-    "pm2:start": "pm2 start config/pm2/ecosystem.config.js --env production",
-    "pm2:restart": "pm2 restart info330 --update-env",
-    "pm2:logs": "pm2 logs info330",
+    "pm2:start": "pm2 start config/pm2/ecosystem.c-spr26.config.js --env production",
+    "pm2:restart": "pm2 restart sql-chat-c-spr26 --update-env",
+    "pm2:logs": "pm2 logs sql-chat-c-spr26",
     "pm2:save": "pm2 save"
   },
   "dependencies": {
